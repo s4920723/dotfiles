@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) pulseaudio-equalizer toggle &> /dev/null ;;
+	3) pulseaudio-equalizer-gtk && disown ;;
+esac
+
+eqstatus=$(pulseaudio-equalizer status | grep 'Equalizer status' | awk -F "[][{}]" '{print $2}')
+
+if [ "$eqstatus" == "enabled" ]; then
+	echo "ON"
+else
+	echo "OFF"
+fi

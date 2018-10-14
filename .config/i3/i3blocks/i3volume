@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) amixer -q set Master toggle ;;
+	3) $TERMINAL -n mixer -e alsamixer && disown  ;;
+	4) amixer -q sset Master 5%+ ;;
+	5) amixer -q sset Master 5%- ;;
+esac
+
+printalsastatus() { [[ $(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $4 }') = "off" ]] && echo -n " MUTE" && exit
+echo  $(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }') ;}
+printalsastatus

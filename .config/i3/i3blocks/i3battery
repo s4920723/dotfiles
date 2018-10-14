@@ -1,0 +1,25 @@
+#!/bin/bash
+
+NUM=`cat /sys/class/power_supply/BAT1/capacity` || exit
+STATUS=`cat /sys/class/power_supply/BAT1/status`
+
+if [ "$NUM" -ge 80 ]; then
+	color="#00FF00"
+	icon=""
+elif [ "$NUM" -ge 60 ]; then
+	color="#FFFFFF"
+	icon=""
+elif [ "$NUM" -ge 40 ]; then
+	color="#FFF600"
+	icon=""
+elif [ "$NUM" -ge 20 ]; then
+	color="#FFAE00"
+	icon=""
+else
+	color="#FF0000"
+	icon=""
+fi
+
+[ "$STATUS" = "Charging" ] && color="#FFF"
+
+echo "`sed -e "s/,//g;s/Discharging/$icon/;s/Charging//;s/Unknown//;s/Full//;s/ 0*/ /g;s/ :/ /g" <<<"$STATUS"` `sed -e 's/$/%/' <<<"$NUM"`"

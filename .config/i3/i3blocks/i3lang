@@ -1,0 +1,11 @@
+#!/bin/Bash
+
+## NOT FINISHED
+## This script prints out the current xorg keyboard layout language
+## using https://github.com/nonpop/xkblayout-state.git
+
+case $BLOCK_BUTTON in
+	1) 
+esac
+
+$HOME/Github/xkblayout-state/xkblayout-state print %n
