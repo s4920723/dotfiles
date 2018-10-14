@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$#" -ne 1  ]; then
+	echo "Wrong number of arguments."
+	$SHELL
+fi
+
+imageformat=$(basename $1 | cut -d "." -f 2)
+if [ $imageformat != "jpg" ]; then
+	echo "$imageformat - unsupported image format. This script only uses .jpg images."
+	$SHELL
+fi
+
+if [ -f $1 ]; then
+	cp $1 $HOME/
+	imagename=$(basename $1)
+	
+	if [ -f $HOME/wallpaper_prev.jpg ]; then
+		rm $HOME/wallpaper_prev.jpg
+		echo "Deleting previous wallpaper."
+	fi
+	
+	if [ -f $HOME/wallpaper.jpg ]; then
+		mv $HOME/wallpaper.jpg $HOME/wallpaper_prev.jpg
+	fi
+	
+	mv $HOME/$imagename $HOME/wallpaper.jpg
+	echo "The new wallpaper file has been moved."
+	echo "Using wal -t -i $HOME/wallpaper.jpg to apply."
+	wal -c
+	wal -t -i $HOME/wallpaper.jpg
+else
+	echo "Image file not found."
+fi
+$SHELL
