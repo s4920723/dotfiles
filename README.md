@@ -18,3 +18,4 @@ List of other programs that I run on my desktop:
 * xkblayout-state
 * Noto fonts
 * Font Awesome 4
+* feh
