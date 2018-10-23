@@ -21,6 +21,7 @@ List of other programs and packages that I run on my desktop:
 * Noto fonts
 * Font Awesome 4
 * feh
+* gvim
 * ranger
 * thunar
 * Steam
@@ -32,3 +33,5 @@ List of other programs and packages that I run on my desktop:
 * cmus
 * spotify
 * firefox
+* zathura
+* pandoc
