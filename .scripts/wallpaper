@@ -3,15 +3,18 @@
 if [ "$#" -ne 1  ]; then
 	echo "Wrong number of arguments."
 	$SHELL
-fi
-
-imageformat=$(basename $1 | cut -d "." -f 2)
-if [ $imageformat != "jpg" ]; then
-	echo "$imageformat - unsupported image format. This script only uses .jpg images."
-	$SHELL
+	exit 1
 fi
 
 if [ -f $1 ]; then
+	
+	imageformat=$(basename $1 | cut -d "." -f 2)
+	if [ $imageformat != "jpg" ]; then
+		echo "$imageformat - unsupported image format. This script only uses .jpg images."
+		$SHELL
+		exit 1
+	fi
+
 	cp $1 $HOME/
 	imagename=$(basename $1)
 	

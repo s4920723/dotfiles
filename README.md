@@ -35,3 +35,4 @@ List of other programs and packages that I run on my desktop:
 * firefox
 * zathura
 * pandoc
+* lutris
