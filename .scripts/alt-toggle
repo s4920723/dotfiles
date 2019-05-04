@@ -1,0 +1,8 @@
+#!/bin/bash
+# Toggle between two Openbox configs that have the Alt on/off
+
+cp $HOME/.config/openbox/rc.xml $HOME/.config/openbox/rc_temp.xml
+rm -f $HOME/.config/openbox/rc.xml
+mv $HOME/.config/openbox/rc_alt_toggle.xml $HOME/.config/openbox/rc.xml
+mv $HOME/.config/openbox/rc_temp.xml $HOME/.config/openbox/rc_alt_toggle.xml
+openbox --reconfigure

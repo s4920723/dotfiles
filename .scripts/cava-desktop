@@ -1,0 +1,5 @@
+#!/bin/bash
+xfce4-terminal -e "cava" --hide-borders --hide-toolbar --hide-menubar --hide-scrollbar --title=desktopconsole --geometry=130x44+0+0 &  
+sleep 0.3  
+wmctrl -r desktopconsole -b add,below,sticky  
+wmctrl -r desktopconsole -b add,skip_taskbar,skip_pager

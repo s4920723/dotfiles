@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 0 
 set $mod Mod1
 gaps inner 15
 gaps outer 15
@@ -33,10 +33,11 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st
+
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q [con_id="__focused__" instance="^(?!dropdown).*$"] kill
 
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -136,6 +137,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+bindsym $mod+Shift+y exec --no-startup-id "bash ~/.scripts/i3resize left"
+bindsym $mod+Shift+u exec --no-startup-id "bash ~/.scripts/i3resize down"
+bindsym $mod+Shift+i exec --no-startup-id "bash ~/.scripts/i3resize up"
+bindsym $mod+Shift+o exec --no-startup-id "bash ~/.scripts/i3resize right"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -171,7 +177,8 @@ bindsym $mod+r mode "resize"
 # Volume keys
 bindsym XF86AudioRaiseVolume exec amixer set Master -q 5%+
 bindsym XF86AudioLowerVolume exec amixer set Master -q 5%-
-bindsym $mod+Tab workspace next
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Return [instance="dropdown"] scratchpad show ; [instace="dropdown"] move position center
 
 ## Defualt font size for bar and dmenu
 set $myFontSize 12
@@ -194,7 +201,7 @@ set_from_resource $urgent-col	  i3wm.color7	#4fafd3
 
 
 # Run dmenu with special flags
-bindsym $mod+d exec dmenu_run -nb "$bg-col" -nf "$inactive-col" -sb "$active-col" -sf "$bg-col" -fn "Noto Sans-$myFontSize"
+bindsym $mod+d exec dmenu_run -nb "$bg-col" -nf "$inactive-col" -sb "$active-col" -sf "$bg-col" -fn "Noto Sans-14"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -210,9 +217,11 @@ client.background	 $inactive-col
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	# Uncomment for transparency
+	# i3bar_command  i3blocks -t
 	position top
 	strip_workspace_numbers yes
-	font pango:Noto Sans, Awesome Font $myFontSize 
+	font pango: Noto Sans, FontAwesome $myFontSize 
 	colors {
 		background $bg-col
 		separator  $active-col
@@ -226,13 +235,32 @@ bar {
 
 ## i3 STARTUP ##
 # Wallpaper and colorscheme setup
-exec_always --no-startup-id wal -t -i ~/wallpaper.jpg
+exec_alway --no-startup-id wal -c
+exec_always --no-startup-id wal -t -i ~/wallpaper.jpg && xautolock -time 10 -locker "~/Github/i3lock-color/lock.sh '$active-col$lock_alpha' '$active-col$lock_alpha'"
+## FLOATING WINDOWS ##
 # Composite manager
 exec --no-startup-id compton
+exec_always --no-startup-id flashfocus -t 300 
 # Network manager applet
 exec_always --no-startup-id nm-applet
-
+# Nvidia settings
+exec_always --no-startup-id nvidia-settings --load-config-only
+# i3lock-color when not active
+set $lock_alpha cc
+exec_always --no-startup-id xautolock -time 10 -locker "~/Github/i3lock-color/lock.sh '$active-col$lock_alpha' "
+exec_always --no-startup-id setxkbmap -layout us,bg -variant ,bas_phonetic -option grp:lctrl_lwin_toggle
 
 ## FLOATING WINDOWS ##
-for_window [class="mpv"] floating enable position center border pixel 1
+for_window [class="mpv"] floating enable position center
 for_window [title="Friends List"] floating enable
+for_window [class="Maya-2018"] floating enable
+for_window [title="PulseAudio Multiband EQ *"] floating enable position center
+for_window [instance="mixer"] floating enable
+
+## SCRATCHPAD TERMINAL ##
+#for_window [instance="dropdown_*"] floating enable
+#for_window [instance="dropdown_*"] move scratchpad
+#for_window [instance="dropdown_*"] sticky enable
+#for_window [instance="dropdown_*"] scratchpad show
+#for_window [instance="dropdown_*"] move position center
+#exec_always --no-startup-id st -n dropdown

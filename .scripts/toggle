@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ "$(ps -A | grep $1)" != "" ]]; then
+	killall $1
+	notify-send Toggle "Killing $1"
+else
+	$1 &
+	disown
+	notify-send Toggle "Starting $1"
+fi

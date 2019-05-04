@@ -1,0 +1,5 @@
+#!/bin/bash
+
+OUTPUT=$(basename $1 | cut -d "." -f 1).pdf
+MSDIR=$(dirname $1)
+groff -ms $1 -T pdf > $OUTPUT

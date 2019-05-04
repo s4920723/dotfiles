@@ -1,0 +1,6 @@
+#!/bin/bash
+
+GTK3CONFIG="$HOME/.config/gtk-3.0/settings.ini"
+NEWICONS=$(ls -1 ~/.icons | dmenu -fn "Noto Sans-14" -l 10 -p "Select icon theme:")
+OLDICONS=$(grep "gtk-icon-theme-name" $GTK3CONFIG | awk '{ print $NF }')
+sed -i "s/$OLDICONS/$NEWICONS/g" $GTK3CONFIG

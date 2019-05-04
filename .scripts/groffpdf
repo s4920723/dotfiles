@@ -1,0 +1,23 @@
+#!/bin/bash
+
+openPDF () {
+	echo -n "Open PDF with evince? [y/n]: "
+	read OPENANSWER
+	if [[ $OPENANSWER == "y" ]]; then
+		evince $1 &
+	fi
+}
+
+OUTPUT=$(basename $1 | cut -d "." -f 1).pdf
+MSDIR=$(dirname $1)
+groff -ms $1 -T pdf > $OUTPUT
+
+echo -n "Move output PDF to original directory? [y/n]: "
+read ANSWER
+
+if [[ $ANSWER == "y" ]]; then
+	mv $OUTPUT $MSDIR
+	openPDF $MSDIR/$OUTPUT
+else
+	openPDF $OUTPUT
+fi

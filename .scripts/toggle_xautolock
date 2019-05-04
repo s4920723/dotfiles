@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ "$(ps -A | grep xautolock)" != "" ]]; then
+	killall xautolock
+	notify-send Toggle "Killing xautolock"
+else
+	xautolock -time 10 -locker slock &
+	disown
+	notify-send Toggle "Starting xautolock"
+fi

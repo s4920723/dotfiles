@@ -32,6 +32,7 @@ if [ -f $1 ]; then
 	echo "Using wal -t -i $HOME/wallpaper.jpg to apply."
 	wal -c
 	wal -t -i $HOME/wallpaper.jpg
+	notify-send Wallpaper "Wallpaper set to $imagename"
 else
 	echo "Image file not found."
 fi
