@@ -5,50 +5,59 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# User specific environmentj
+PATH="$HOME/.local/bin:$HOME/bin:$PATH:$HOME/.scripts:$HOME/Qt/Tools/QtCreator/bin"
+export PATH
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# Environment variables
-export PATH="${PATH}:${HOME}/.local/bin/"
-export LD_LIBRARY_PATH="/opt/Autodesk/Adlm/R14/lib64/"
-export MOUNT_DIR="/run/media/$USER"
-
-# Aliases
-alias ls='ls --color=auto'
-alias nuke="exec /usr/local/Nuke11.2v3/Nuke11.2 --nc"
-alias nukex="exec /usr/local/Nuke11.2v3/Nuke11.2 --nc --nukex"
-alias nukestudio="exec /usr/local/Nuke11.2v3/Nuke11.2 --nc --studio"
-alias wallpaper="exec ~/.scripts/wallpaper"
-alias dmount="exec ~/.scripts/dmenumount"
-alias dumount="exec ~/.scripts/dmenuumount"
-alias ntfsmount="sudo mount -t ntfs-3g"
+# User specific aliases and functions
+# Flatpak shortcuts
+alias spotify="flatpak run com.spotify.Client"
+alias discord="flatpak run com.discordapp.Discord"
+alias vlc="flatpak run org.videolan.VLC"
+# Shutdown/reboot shortcuts
 alias sdn="sudo shutdown now"
 alias srn="sudo reboot now"
-alias i3c="vim $HOME/.config/i3/config"
-alias i3bc="vim $HOME/.config/i3/i3blocks.conf"
-alias usb="cd $MOUNT_DIR"
-alias discord="Discord"
-alias mari="$HOME/Builds/bin_builds/Mari4.2v1/mari --nc"
-alias bs="firefox brightspace.bournemouth.ac.uk &"
-alias lock="~/Github/i3lock-color/lock.sh 4dff71cc 4dff71cc"
-alias eq="pulseaudio-equalizer-gtk"
-alias eqstat="pulseaudio-equalizer status | grep 'Equalizer status' "
-alias deadlines="cat $HOME/Documents/uni/level06/deadlines"
-alias todo="cat $HOME/Documents/TODO"
+# Wallpaper script shortcut
+alias wallpaper="exec $HOME/.scripts/wallpaper"
+# DNF shortcuts
+alias dnfs="sudo dnf search"
+alias dnfi="sudo dnf install"
+alias dnfl="sudo dnf list"
+alias dnfr="sudo dnf remove"
+alias dnfu="sudo dnf update"
+# Brightspace shortcut
+alias bs="firefox brightspace.bournemouth.ac.uk"
+# Print To-do list
+alias todo-="cat $HOME/Documents/todoLists/todo-avet"
+alias todo-mc="cat $HOME/Documents/todoLists/todo-mc"
+alias todo-fmp="cat $HOME/Documents/todoLists/todo-fmp"
+alias todo-in="cat $HOME/Documents/todoLists/todo-in"
+alias todo-avet="cat $HOME/Documents/todoLists/todo-avet"
+alias deadlines="cat $HOME/Documents/todoLists/deadlines"
+# File browser
+alias naut="nautilus"
+# xfce4 compositor toggle
+alias comp="xfconf-query --channel=xfwm4 --property=/general/use_compositing --type=bool --toggle"
+# University project folders
+alias inov="cd $HOME/Documents/uni/level06/innovations"
+alias fmp="cd $HOME/Documents/uni/level06/major_project"
+alias avet="cd $HOME/Documents/uni/level06/AVET"
+alias ast="cd $HOME/Documents/uni/level06/AST"
+alias mc="cd $HOME/Documents/uni/level06/masterclass"
+# Edit WM config files shortcuts
+alias i3config="vim $HOME/.config/i3/config"
+alias i3blocksconfig="vim $HOME/.config/i3/i3blocks.conf"
+alias obconfig="vim $HOME/.config/openbox/rc.xml"
+# Kill compositor
+alias killcomp="killall compton"
+# Maya license paths
+export LD_LIBRARY_PATH=/opt/Autodesk/Adlm/R14/lib64/:/usr/local/lib
+
 # Prompt
-#PS1='[\u@\h \W]\$ ' backup PS1
 PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]\[\033[38;5;6m\]@\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\w\\$ \[$(tput sgr0)\]"
-PATH=$PATH:$HOME/.scripts
-
-# Renderman environment variables
-export RMANTREE=/opt/pixar/RenderManProServer-22.1/
-export PYTHONPATH=$PYTHONPATH:$RMANTREE/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/$RMANTREE/lib:/usr/lib/
-export PATH=$PATH:/$RMANTREE/bin
-export TERMINAL=st
-
-# Allowing Ctrl-S and others to work
-stty -ixon
 
 # Allow Vi mode
 set -o vi
