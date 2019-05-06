@@ -1,0 +1,23 @@
+#!/bin/bash
+
+NUKERUN="/usr/local/Nuke11.3v4/Nuke11.3"
+LICENSE=$(printf "Non-commercial\nCommerical\n" | dmenu -fn "Noto Sans-14" -p "Nuke License: ")
+VARIANT=$(printf "Nuke\nNukeX\nNuke Studio\n" | dmenu -fn "Noto Sans-14" -p "Nuke Variant: ")
+
+if [[ "$LICENSE" == "Non-commercial" ]]; then
+	if [[ "$VARIANT" == "Nuke" ]]; then
+		$NUKERUN --nc
+	elif [[ "$VARIANT" == "NukeX" ]]; then
+		$NUKERUN --nc --nukex
+	elif [[ "$VARIANT" == "Nuke Studio" ]]; then
+		$NUKERUN --nc --studio
+	fi
+elif [[ "$LICENSE" == "Commercial" ]]; then
+	if [[ "$VARIANT" == "Nuke" ]]; then
+		$NUKERUN
+	elif [[ "$VARIANT" == "NukeX" ]]; then
+		$NUKERUN --nukex
+	elif [[ "$VARIANT" == "Nuke Studio" ]]; then
+		$NUKERUN --studio
+	fi
+fi

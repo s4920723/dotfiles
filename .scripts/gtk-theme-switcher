@@ -1,6 +1,8 @@
 #!/bin/bash
 
 GTK3CONFIG="$HOME/.config/gtk-3.0/settings.ini"
+GTK2CONFIG="$HOME/.gtkrc-2.0"
 NEWTHEME=$(ls -1 ~/.themes | dmenu -fn "Noto Sans-14" -l 10 -p "Select theme:")
 OLDTHEME=$(grep "gtk-theme-name" $GTK3CONFIG | awk '{ print $NF }')
 sed -i "s/$OLDTHEME/$NEWTHEME/g" $GTK3CONFIG
+sed -i "s/$OLDTHEME/$NEWTHEME/g" $GTK2CONFIG
