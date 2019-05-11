@@ -1,4 +1,4 @@
-#!/bin/Bash
+#!/bin/bash
 
 ## NOT FINISHED
 ## This script prints out the current xorg keyboard layout language
@@ -8,4 +8,4 @@ case $BLOCK_BUTTON in
 	1) 
 esac
 
-$HOME/Github/xkblayout-state/xkblayout-state print %n
+$HOME/Builds/xkblayout-state/xkblayout-state print %n

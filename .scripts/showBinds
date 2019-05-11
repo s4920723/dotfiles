@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BINDSLIST=$(cat $HOME/.config/i3/config | grep 'bindsym $mod+F')
+CLEANLIST=$(echo "$BINDSLIST" | sed 's/bindsym\s$mod+//g;s/exec\s--no-startup-id//g')
+notify-send Keybinds "$CLEANLIST"
+
