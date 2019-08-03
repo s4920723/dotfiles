@@ -2,7 +2,7 @@
 
 OPTIONLIST=$' Terminal\n Media\n PDF\n Spotify\n Python\n Browser\n CG\n Steam'
 FOCUSED=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2 | cut -c 1)
-LABEL=$(echo "$OPTIONLIST" | dmenu -fn "Noto Sans-14" -l 10 -p "Label: " | cut -c 1 )
+LABEL=$(echo "$OPTIONLIST" | dmenu -fn "Noto Sans-14" -l 10 -p "Label: " -i | cut -c 1 )
 LABELFULL="$LABEL$FOCUSED"
 
 if [[ "LABEL" == "" ]]; then

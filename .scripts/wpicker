@@ -1,0 +1,10 @@
+#!/bin/sh
+
+WPNAME= ls $HOME/Wallpapers | dmenu -fn "Noto Sans-14" -l 10 -p "Choose Wallpaper:"
+FULLPATH="$HOME/Wallpapers/$WPNAME"
+wallpaper $FULLPATH
+
+echo "$WPNAME"
+echo "$FULLPATH"
+
+notify-send Wallpaper "BAM!"
